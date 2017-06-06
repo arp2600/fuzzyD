@@ -1,6 +1,6 @@
 
 // A fuzz-score that can be used to order results.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Score(pub i64);
 
 // Build a fuzz-score based off number of occurance of a substring.
