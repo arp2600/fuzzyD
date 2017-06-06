@@ -1,0 +1,2 @@
+# fuzzyD
+Fuzzy cd command
