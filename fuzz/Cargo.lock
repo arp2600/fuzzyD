@@ -1,0 +1,4 @@
+[root]
+name = "fuzz"
+version = "0.1.0"
+

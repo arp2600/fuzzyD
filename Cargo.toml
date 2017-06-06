@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["George Roger <georger@xmos.com>", "Sam Kellett <samkellett@gmail.com>"]
 
 [dependencies]
-fuzz = { path = "fuzz" }
+fuzz = { version = "0.1.0", path = "fuzz" }
