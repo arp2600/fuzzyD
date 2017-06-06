@@ -1,0 +1,6 @@
+[package]
+name = "fuzzy_d"
+version = "0.1.0"
+authors = ["George Roger <georger@xmos.com>"]
+
+[dependencies]
