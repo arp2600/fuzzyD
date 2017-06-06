@@ -6,8 +6,12 @@ pub struct Score(pub i64);
 // Build a fuzz-score based off number of occurance of a substring.
 pub fn substrings(needle: &str, haystack: &str) -> Score
 {
-    let score = haystack.matches(needle).count();
-    Score(score as i64)
+    if needle.len() == 0 {
+        Score(0)
+    } else {
+        let score = haystack.matches(needle).count();
+        Score(score as i64)
+    }
 }
 
 #[cfg(test)]
@@ -17,6 +21,7 @@ mod tests {
     #[test]
     fn test_substrings() {
         // Zero matches.
+        assert_eq!(substrings("", "badger"), Score(0));
         assert_eq!(substrings("foo", "badger"), Score(0));
 
         // One match.
