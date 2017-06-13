@@ -1,53 +1,27 @@
-extern crate find;
-extern crate fuzz;
+extern crate cli;
 
-use std::env;
 use std::io;
 
-use std::cmp::Ordering;
-use std::collections::BinaryHeap;
-use std::path::PathBuf;
-
-use fuzz::{substrings, Score};
-
-#[derive(Debug, Eq, PartialEq)]
-struct Matched {
-    score: Score,
-    path: PathBuf,
-}
-
-impl Ord for Matched {
-    fn cmp(&self, other: &Matched) -> Ordering {
-        self.score.cmp(&other.score)
-    }
-}
-
-impl PartialOrd for Matched {
-    fn partial_cmp(&self, other: &Matched) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
+use cli::Canvas;
 
 fn main() {
-    use io::Write;
+    use io::Read;
 
-    print!("Enter search term: ");
-    io::stdout().flush().unwrap();
+    // Create a canvas to write on that is 6 lines tall.
+    let mut canvas = Canvas::new(6);
 
-    let mut needle = String::new();
-    io::stdin().read_line(&mut needle).expect("Error reading input.");
-    let needle = needle.trim();
+    // Write prompt on first line:
+    canvas.write(0, "Enter search term: ");
 
-    let current_working_directory = env::current_dir().unwrap();
-    let mut heap: BinaryHeap<_> = find::find(current_working_directory)
-        .map(|p| Matched{ score: substrings(&needle, p.to_str().unwrap()), path: p})
-        .filter(|s| s.score != Score(0))
-        .collect();
+    canvas.write(1, "1");
+    canvas.write(2, "12");
+    canvas.write(3, "123");
+    canvas.write(4, "1234");
+    canvas.write(5, "12345");
 
-    // Print out the top ten results.
-    for _ in 0..10 {
-        let result = heap.pop().unwrap();
-        println!("{:?}", result)
-    }
+    // Just block until the next key pressed, for testing.
+    let stdin = io::stdin();
+    let mut bytes = stdin.bytes();
+    let b = bytes.next().unwrap().unwrap();
 }
 
