@@ -6,3 +6,5 @@ authors = ["George Roger <georger@xmos.com>", "Sam Kellett <samkellett@gmail.com
 [dependencies]
 find = { version = "0.1.0", path = "find" }
 fuzz = { version = "0.1.0", path = "fuzz" }
+ignore = "0.2"
+crossbeam = "0.2"
